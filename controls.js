@@ -1,48 +1,52 @@
-class Controls {
-    constructor() {
-        this.forward = false;
-        this.left = false;
-        this.right = false;
-        this.reverse = false;
+class Controls{
+    constructor(type){
+        this.forward=false;
+        this.left=false;
+        this.right=false;
+        this.reverse=false;
 
-        this.#addKeyboardListeners();  // Fără "#", devine metodă publică
+        switch(type){
+            case "KEYS":
+                this.#addKeyboardListeners();
+                break;
+            case "DUMMY":
+                this.forward=true;
+                break;
+        }
     }
 
-    #addKeyboardListeners() {  // Fără "#"
-        document.onkeydown = (event) => {
-            switch (event.key) {
-                case 'a':
-                    this.left = true;
+    #addKeyboardListeners(){
+        document.onkeydown=(event)=>{
+            switch(event.key){
+                case "a":
+                    this.left=true;
                     break;
-                case 'd':
-                    this.right = true;
+                case "d":
+                    this.right=true;
                     break;
-                case 'w':
-                    this.forward = true;
+                case "w":
+                    this.forward=true;
                     break;
-                case 's':
-                    this.reverse = true;
-                    break;
-            }
-            // console.table(this);  // Debugging
-        };
-
-        document.onkeyup = (event) => {
-            switch (event.key) {
-                case 'a':
-                    this.left = false;
-                    break;
-                case 'd':
-                    this.right = false;
-                    break;
-                case 'w':
-                    this.forward = false;
-                    break;
-                case 's':
-                    this.reverse = false;
+                case "s":
+                    this.reverse=true;
                     break;
             }
-            // console.table(this);  // Debugging
-        };
+        }
+        document.onkeyup=(event)=>{
+            switch(event.key){
+                case "a":
+                    this.left=false;
+                    break;
+                case "d":
+                    this.right=false;
+                    break;
+                case "w":
+                    this.forward=false;
+                    break;
+                case "s":
+                    this.reverse=false;
+                    break;
+            }
+        }
     }
 }
